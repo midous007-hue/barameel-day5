@@ -1,31 +1,91 @@
-# BARAMEEL WORLD V14 — Master Rebuild
+# BARAMEEL WORLD — MASTER PROJECT V15
 
-This is a fresh rebuild of the Barameel digital game architecture based on the accessible BARAMEEL brand reference, the uploaded game evaluation PDF, the latest V13 source, and the agreed project logic.
+This repository is the clean master build for the current BARAMEEL digital experience.
 
-## Core flow
-BARAMEEL WORLD SPLASH → BARAMEEL WORLD → RUN / DUO LINK / MENU / POST / MY BARAMEEL.
-Only RUN is fully wired into the existing game screens in this build. The other World paths are intentionally isolated so their future screens do not pollute RUN.
+## Current architecture
 
-## RUN flow
-run.html → screen02.html → screen03.html → screen04.html → screen05.html → screen06.html.
+BARAMEEL WORLD is the main hub. It contains separate experiences:
 
-## Universal QR rule
-Production QR is one universal token: `BARAMEEL-UNIVERSAL`.
-The QR itself does NOT encode a collection/image/piece. Production scanning must call the server `/scan` endpoint, consume a one-time scan ticket atomically, and draw the reward server-side. This is the anti-farming architecture.
+- BARAMEEL RUN — active production path in this build.
+- BARAMEEL DUO LINK — social QR-to-QR experience; UI shell is present, final artwork/flow is not yet supplied.
+- BARAMEEL MENU — reserved for the food/menu experience; final artwork is not yet supplied.
+- BARAMEEL POST — postcard + envelope + Barameel stamp communication/reward experience; final artwork is not yet supplied.
+- MY BARAMEEL — player identity/progress area; final artwork is not yet supplied.
 
-A client-side random draw exists only as an explicit demo fallback when no API base is configured. It is NOT production-secure and must be disabled before launch.
+The project is intentionally English-only at this stage. Language selection will be added before the localized UI is finalized.
 
-## Cross-device state
-localStorage is only a cache. Production source of truth is Supabase. Player state, points, collections, scans, tickets, matches and rewards are server-side.
+## Non-negotiable QR architecture
 
-## Backend
-See `supabase/schema.sql` and `supabase/functions/*`.
+There is ONE printed gameplay QR:
 
-## Assets
-See `ASSET-MANIFEST.txt`. New artwork must be uploaded with the exact names listed there. Do not rename existing RUN artwork.
+`BARAMEEL-UNIVERSAL`
 
-## Language
-Current master UI is English. Arabic/English choice is planned as a separate language screen before World.
+The printed QR does not encode a collection, image, piece, player, or reward. Every legitimate scan is resolved server-side against the player's scan entitlement/ticket.
+
+Flow:
+
+`ONE QR → PLAYER → SCAN TICKET → SERVER-SIDE DRAW → PIECE / BONUS / REWARD → PLAYER ACCOUNT`
+
+The client never decides the production reward and never uses the old per-piece QR system.
+
+## Removed from this master
+
+- All old per-piece/per-image QR assets.
+- Legacy QR parsing.
+- Client-side random reward fallback.
+- Legacy `collection|image|piece` scan behavior.
+- Screen 07 / duplicate rewards screen.
+- Old instructions that treat a printed QR as a specific puzzle piece.
+
+## Player state
+
+Production source of truth is the backend/database. Browser localStorage is only a cache for UI continuity.
+
+Player state includes:
+
+- BARAMEEL Player ID / code
+- runner/avatar
+- total points
+- weekly points
+- rank / player count
+- checkpoints
+- collections / pieces
+- scan history
+- rewards
+- Duo Link history
+- last seen / analytics events
+
+This is required so the same player can move between devices without losing collections.
+
+## BARAMEEL RUN sequence
+
+`WORLD SPLASH → WORLD → RUN → RUN START → RUNNER SELECT → PROGRESS/REWARDS → SCAN → COLLECTIONS`
+
+Existing collection system remains 10 master images × 9 pieces for the current ALEXANDRIA collection. More collections can be added without changing the printed QR.
+
+## Camera
+
+The scanner keeps the camera inside the designed QR frame. It uses native `BarcodeDetector` when available and jsQR as a fallback. It accepts only the universal BARAMEEL QR format.
 
 ## Audio
-Local WAV/MP3 assets from the last working RUN build are retained. V14 uses a local arcade audio bank with a loud, punchy master chain and fallback oscillator motifs for critical interactions.
+
+The current arcade audio bank is retained:
+
+- tap.wav
+- select.wav
+- confirm.wav
+- back.wav
+- scan.wav
+- error.wav
+- completion-arcade.wav
+- reward-levelup.mp3
+
+## GitHub Pages
+
+The static UI can be hosted directly on GitHub Pages. The production reward/identity system requires the backend described in `docs/BACKEND-SETUP.md`.
+
+Do not expose database service-role keys in GitHub Pages.
+
+## Uploading artwork
+
+Use `ASSET-MANIFEST.txt` as the only current upload instruction. Do not create extra QR images. Do not rename approved assets.

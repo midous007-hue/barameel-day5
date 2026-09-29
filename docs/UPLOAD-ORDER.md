@@ -1,30 +1,14 @@
-# GitHub upload order
+# GITHUB UPLOAD ORDER — V15
 
-Upload the whole repository as a new repository. Do not mix it with the old V12/V13 root.
+1. Delete the old repository contents or use a completely new repository.
+2. Upload the contents of this ZIP at repository root.
+3. Do NOT upload any old `qr-codes/` directories.
+4. Do NOT mix files from V12/V13 into this repository.
+5. If runner art is not yet final, leave the named slots empty and upload the final files later using `ASSET-MANIFEST.txt`.
+6. Keep `config.js` free of secrets. Set only the public backend base URL there when the backend is deployed.
+7. Enable GitHub Pages from the repository root.
+8. Verify `index.html` opens the BARAMEEL WORLD splash.
+9. Verify RUN is the only currently active World experience.
+10. Connect the production backend before expecting a QR scan to award a reward.
 
-Required root:
-index.html
-world.html
-run.html
-screen02.html
-screen03.html
-screen04.html
-screen05.html
-screen06.html
-duo-link.html
-menu.html
-post.html
-my-barameel.html
-app.js
-styles.css
-config.js
-register-sw.js (optional for PWA caching; add after first stable test)
-sw.js (optional; add after first stable test)
-
-Required folders:
-assets/
-audio/
-supabase/
-docs/
-
-Do NOT rename existing RUN artwork. Upload new World-card artwork using ASSET-MANIFEST.txt exact names.
+Production rule: no service-role database key belongs in this repository.

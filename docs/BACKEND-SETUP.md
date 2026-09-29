@@ -1,12 +1,26 @@
-# Production backend setup
+# BACKEND SETUP
 
-1. Create a Supabase project.
-2. Run `supabase/schema.sql` in SQL Editor.
-3. Load the 90-piece ALEXANDRIA pool from `assets/collections/collection01/collection.json` into `collection_pieces` (a small seed script can be generated once the final reward economics are locked).
-4. Deploy Edge Functions: `scan`, `player`, `analytics`, `duo-link`.
-5. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` as function secrets.
-6. Set `config.js` `apiBase` to the project's `/functions/v1` URL and set `production:true`.
-7. Grant tickets only from trusted POS/admin workflows using `grant_scan_ticket` with the service role. Never expose the service role key to the browser.
-8. Print ONE universal QR whose payload is `BARAMEEL-UNIVERSAL`.
+The static GitHub Pages frontend cannot securely implement global player identity, one-time scan tickets, server-side random rewards, leaderboards, or anti-farming rules by itself.
 
-Important: before public launch, disable the demo fallback in `screen05.html` or ensure `production:true` and a working `/scan` endpoint. The browser must never be trusted to choose production rewards.
+The included `supabase/schema.sql` is the production data model starting point.
+
+Required API routes:
+
+- POST /player — create/sync player identity.
+- POST /scan — atomically consume ticket and draw reward server-side.
+- POST /analytics — record events.
+- POST /duo-link — create a one-time pair result.
+
+Recommended production flow for a scan:
+
+1. Verify player session.
+2. Verify the supplied ticket belongs to that player and is available.
+3. Atomically consume the ticket.
+4. Select a reward from the active weighted reward pool.
+5. Insert the scan record with an idempotency key.
+6. Insert the piece if new and update points.
+7. Return the resulting player state and reward.
+
+If the request is repeated with the same idempotency key, return the original result instead of awarding again.
+
+The client should never receive database service-role credentials.

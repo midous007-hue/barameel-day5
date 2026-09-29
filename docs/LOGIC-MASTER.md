@@ -1,35 +1,56 @@
-# BARAMEEL WORLD — Master Logic
+# BARAMEEL WORLD — LOGIC MASTER
 
-## 1. World entry
-Splash → World.
-World is the brand universe, not a child-only game. RUN, DUO LINK, MENU, POST and MY BARAMEEL are separate paths.
+## 1. World hierarchy
 
-## 2. RUN
-RUN is the physical quest: enter → choose runner → progress/rewards → scan → collection → progress.
-The existing ALEXANDRIA collection remains 10 images × 9 pieces = 90 pieces.
+BARAMEEL WORLD is the brand-level hub, not a synonym for BARAMEEL RUN.
+
+RUN, DUO LINK, MENU, POST and MY BARAMEEL are separate experiences sharing one Player ID.
+
+## 2. BARAMEEL RUN
+
+`Choose runner → progress → scan universal QR → server reward → collection → points → progress`
+
+A completed collection can lead into the competitive/routing layer later:
+
+`completion → leaderboard/rank → WALK TO BARAMEEL → route/checkpoints → final Barameel QR`
+
+The route layer is intentionally not faked in this static master until the mapping provider and Barameel destination coordinates are finalized.
 
 ## 3. Universal QR
-There is one printed universal QR. It is a portal, not a reward definition.
-Production sequence:
-Universal QR → Player ID → available scan ticket → atomic ticket consumption → server-side weighted draw → piece/points/reward → server save → client render.
-The client never chooses the production reward.
 
-## 4. Ticket anti-farming rule
-A scan ticket is an entitlement. A ticket can be consumed exactly once. A universal QR alone never grants unlimited scans.
-Tickets can be granted by trusted POS/admin/purchase/event workflows.
+The printed QR is universal. It is not a piece ID.
 
-## 5. Cross-device source of truth
-Points, collections, scans, tickets, matches and rewards live on the backend. localStorage is only a UI cache.
+A production scan requires a valid server-side scan ticket. The server consumes the ticket atomically before resolving a reward.
 
-## 6. DUO LINK
-Player A scans Player B's Barameel identity QR. The pair key is canonicalized so A+B and B+A are the same pair. One pair gets one result. No dating language, no open chat.
+The reward can be:
 
-## 7. BARAMEEL POST
-POST is physical/digital correspondence: choose a postcard, enter recipient details, Barameel contacts the recipient, and the recipient gets a Barameel reward/voucher. It is not news and not events.
+- a missing collection piece;
+- a duplicate with a defined duplicate value;
+- points/bonus;
+- a configured reward/voucher.
 
-## 8. Live map / visit layer
-Later phase: custom-styled walking route to Barameel, nearby active-player presence as approximate avatar icons, route checkpoints, server-side checkpoint claims, final Barameel QR.
-Exact player location is not exposed.
+Weighted reward configuration is server-side and can be changed without reprinting the QR.
 
-## 9. Analytics
-Every meaningful event can be sent to analytics_events. The future admin dashboard should expose visits, unique players, active players, scans, rewards, matches, collection completion, route starts, arrivals, final QR completions, retention and source attribution.
+## 4. Cross-device identity
+
+The player ID is the persistent identity. LocalStorage is only a cache. Points, pieces, rewards, tickets and Duo Link results must be stored server-side.
+
+## 5. Duo Link
+
+Duo Link is not dating and is not a public chat system.
+
+`Player A scans Player B code → server normalizes pair → checks pair history → creates one result → reward`
+
+The same pair cannot repeatedly farm new results.
+
+## 6. BARAMEEL POST
+
+Post is a physical/social communication feature:
+
+`choose postcard → recipient details → Barameel contacts recipient → recipient is told a Barameel post arrived → recipient receives a Barameel reward/voucher`
+
+It is not a news feed and not an events page.
+
+## 7. Target outcome
+
+All experiences are designed to create measurable engagement and, where applicable, convert digital participation into visits to Barameel.
