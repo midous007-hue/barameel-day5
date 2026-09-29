@@ -1,0 +1,63 @@
+BARAMEEL WORLD V14 — EXACT ASSET NAMES
+
+WORLD
+assets/barameel-world-splash.webp       ← existing approved splash artwork
+assets/barameel-world.webp              ← existing approved World artwork
+
+WORLD CARDS — upload these when the final artwork is ready
+assets/world-duo-link.webp              ← DUO LINK card/art; two QR phones, friendship/partner concept, no romantic cues
+assets/world-menu.webp                  ← MENU card/art; use MAGMA + fries cone + fried dough product family, not burger
+assets/world-post.webp                  ← POST card/art; Brona + postcard/letter + envelope + Barameel stamp/mailbox concept, not news/events
+assets/world-my-barameel.webp           ← MY BARAMEEL card/art; preserve approved Brona pose/look
+
+RUN — existing
+assets/screen01-start.webp
+assets/screen04-rewards.webp
+assets/screen05-scanner.webp
+assets/screen06-puzzle.webp
+
+RUNNER ART — upload exact names
+assets/screen02-rookie.png
+assets/screen02-skater.png
+assets/screen02-brona.png
+assets/screen02-racer.png
+assets/screen02-chiller.png
+assets/screen02-dreamer.png
+assets/screen03-rookie.png
+assets/screen03-skater.png
+assets/screen03-brona.png
+assets/screen03-racer.png
+assets/screen03-chiller.png
+assets/screen03-dreamer.png
+
+PROFILE
+assets/my-barameel.webp                     ← full My Barameel screen art when final
+
+COLLECTIONS
+assets/collections/collection01/collection.json
+assets/collections/collection01/masters/image01-master.png ... image10-master.png
+
+AUDIO — retained from last working RUN build
+ audio/tap.wav
+ audio/select.wav
+ audio/confirm.wav
+ audio/back.wav
+ audio/scan.wav
+ audio/error.wav
+ audio/completion-arcade.wav
+ audio/reward-levelup.mp3
+
+ART DIRECTION
+- Brona remains the only primary brand heroine.
+- Disco circular mirrored sunglasses remain fixed.
+- Fully closed striped-collar leather jacket; modest styling.
+- Afro hair, bell-bottoms, peace necklace.
+- Brona does not look directly at camera and does not smile for no reason.
+- Confident, mature, self-possessed poses.
+- 70s American retro / Garage / Muscle-Car / Launchpad Americana.
+- Official palette: Midnight Teal #0E2A3D, Mustard #F0C830, Burnt Orange #C2571A, Cream #F5E9DC.
+- Connected brand stripe: navy/teal/mustard/burnt-orange/cream.
+- Avoid Vegas neon, casino aesthetics, modern minimalist UI.
+
+PRINTED UNIVERSAL QR
+assets/barameel-universal-qr.png       ← payload: BARAMEEL-UNIVERSAL; one universal printed QR for production
